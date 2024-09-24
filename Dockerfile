@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     chromium \
-    chromedriver \
+    # chromedriver \
     && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for Chromium
