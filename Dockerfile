@@ -12,6 +12,12 @@ RUN apt-get update && apt-get install -y \
     # chromedriver \
     && rm -rf /var/lib/apt/lists/*
 
+
+# Install chromedriver
+RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip \
+    && unzip /tmp/chromedriver.zip -d /usr/local/bin/ \
+    && rm /tmp/chromedriver.zip
+
 # Set environment variables for Chromium
 ENV CHROME_BIN=/usr/bin/chromium
 ENV CHROME_DRIVER=/usr/lib/chromium/chromedriver
