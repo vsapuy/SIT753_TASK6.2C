@@ -13,7 +13,7 @@ def test_webpage():
 
     try:
         # Navigate to the local web server
-        driver.get("http://localhost:5000")
+        driver.get("http://localhost:5001")
         time.sleep(2)  # Wait for page to load
         
         # Check that the title or a key element is present on the page
