@@ -1,6 +1,5 @@
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim
-
-
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -9,9 +8,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     chromium \
-    # chromedriver \
     && rm -rf /var/lib/apt/lists/*
-
 
 # Install chromedriver
 RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip \
@@ -20,7 +17,7 @@ RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/2.
 
 # Set environment variables for Chromium
 ENV CHROME_BIN=/usr/bin/chromium
-ENV CHROME_DRIVER=/usr/lib/chromium/chromedriver
+ENV CHROME_DRIVER=/usr/local/bin/chromedriver
 
 # Copy the app code
 WORKDIR /app
@@ -32,7 +29,8 @@ RUN pip install -r requirements.txt
 # Expose the port
 EXPOSE 5000
 
-ENV NAME dbm-calc-app
+ENV NAME=dbm-calc-app
+
 # Run the Flask app
 CMD ["python", "app.py"]
 
