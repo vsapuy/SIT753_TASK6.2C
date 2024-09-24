@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     unzip \
-    chromium-browser \
+    chromium \
     chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
