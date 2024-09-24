@@ -3,12 +3,12 @@ FROM python:3.9-slim
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     python3-pip \
-    selenium \
     wget \
     curl \
     unzip \
     chromium \
     chromium-driver \
+    selenium \
     && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for Chromium
