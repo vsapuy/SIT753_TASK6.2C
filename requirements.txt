@@ -1,4 +1,4 @@
 Flask==2.3.2          # Flask web framework
 gunicorn==20.1.0      # WSGI server for running Flask in production
 selenium==4.0.0
-chromedriver==114.0.5735.90
+chromedriver==2.24.1
