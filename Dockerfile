@@ -1,5 +1,8 @@
 FROM python:3.9-slim
 
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     python3-pip \
@@ -18,8 +21,7 @@ ENV CHROME_DRIVER=/usr/lib/chromium/chromedriver
 WORKDIR /app
 COPY . /app
 
-# Install Python dependencies
-RUN pip install -r requirements.txt
+
 
 # Expose the port
 EXPOSE 5000
