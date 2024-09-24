@@ -24,6 +24,7 @@ RUN pip install -r requirements.txt
 # Expose the port
 EXPOSE 5000
 
+ENV NAME dbm-calc-app
 # Run the Flask app
 CMD ["python", "app.py"]
 
