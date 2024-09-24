@@ -1,0 +1,77 @@
+pipeline {
+    agent any
+
+    environment {
+        // Define Docker image name and GitHub repository URL
+        IMAGE_NAME = "dbm-calc-app"
+        GIT_REPO = "https://github.com/vsapuy/SIT753_TASK6.2C.git"
+        DOCKERHUB_USERNAME = 'vsapuy'
+        DOCKERHUB_PASSWORD = 'aeB4@98@JXNH7f-'
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Clone the GitHub repository
+                git url: "${env.GIT_REPO}", branch: 'main'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image from Dockerfile
+                    sh 'docker build -t ${IMAGE_NAME}:latest .'
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // Run Docker container from the built image
+                    sh 'docker run -d -p 5000:5000 ${IMAGE_NAME}:latest'
+                }
+            }
+        }
+        stage('Selenium Test') {
+            steps {
+                script {
+                    // Run Selenium test
+                    sh 'pip install selenium' // Install Selenium if required. Already in requirements.txt
+                    sh 'python test_webpage.py'
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // If you want to push the image to Docker Hub, add this step
+                    // docker login is required before this step
+                    // Example:
+                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    sh 'docker tag ${IMAGE_NAME}:latest <your-dockerhub-repo>/${IMAGE_NAME}:latest'
+                    sh 'docker push <your-dockerhub-repo>/${IMAGE_NAME}:latest'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            //echo 'Build stage completed.'
+            script{
+                sh 'docker ps --filter abcestor=${IMAGE_NAME} -q | xargs docker stop'
+                sh 'docker rmi -f ${IMAGE_NAME}:latest'
+
+            }
+
+        }
+        success {
+            echo 'Docker image built successfully.'
+        }
+        failure {
+            echo 'Docker image build failed.'
+        }
+    }
+}
