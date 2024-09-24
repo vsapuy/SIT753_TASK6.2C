@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y \
     unzip \
     chromium \
     chromium-driver \
-    selenium \
     && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for Chromium
