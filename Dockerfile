@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for Chromium
-ENV CHROME_BIN=/usr/bin/chromium-browser
-ENV CHROME_DRIVER=/usr/lib/chromium-browser/chromedriver
+ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_DRIVER=/usr/lib/chromium/chromedriver
 
 # Copy the app code
 WORKDIR /app
