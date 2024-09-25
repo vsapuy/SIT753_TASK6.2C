@@ -9,7 +9,10 @@ def test_webpage():
     options.add_argument("--headless")  # Run in headless mode
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    driver = webdriver.Chrome(options=options)
+    
+    # Specify the path to chromedriver
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
 
     try:
         # Navigate to the local web server
