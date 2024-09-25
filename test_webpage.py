@@ -1,18 +1,16 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 import time
 
 def test_webpage():
-    # Set up Chrome WebDriver
-    options = webdriver.ChromeOptions()
+    # Set up Firefox WebDriver
+    options = webdriver.FirefoxOptions()
     options.add_argument("--headless")  # Run in headless mode
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    
-    # Specify the path to chromedriver
-    service = Service('/usr/local/bin/chromedriver')
-    driver = webdriver.Chrome(service=service, options=options)
+
+    # Specify the path to geckodriver
+    service = Service('/usr/local/bin/geckodriver')
+    driver = webdriver.Firefox(service=service, options=options)
 
     try:
         # Navigate to the local web server
